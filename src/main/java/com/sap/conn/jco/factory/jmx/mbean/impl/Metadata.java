@@ -54,24 +54,28 @@ class Metadata extends AbstractMetadata
 		}
 	}
 
+	@Override
 	public String getParameterName(MBeanOperationInfo op, MBeanParameterInfo param, int sequence) {
 		String key = join(op.getName(), param.getName());
 		log.debug(key + PARAMETER_NAME);
 		return metadata.getProperty(key + PARAMETER_NAME);
 	}
 
+	@Override
 	public String getParameter(MBeanOperationInfo op, MBeanParameterInfo param, int sequence) {
 		String key = join(op.getName(), param.getName());
 		log.debug(key + PARAMETER);
 		return metadata.getProperty(key + PARAMETER);
 	}
 
+	@Override
 	public String getAttribute(MBeanAttributeInfo info) {
 		String key = info.getName();
 		log.debug(key + ATTRIBUTE);
 		return metadata.getProperty(key + ATTRIBUTE);
 	}
 
+	@Override
 	public String getOperation(MBeanOperationInfo info) {
 		String key = info.getName();
 		if (info.getSignature().length > 0) {
@@ -81,7 +85,8 @@ class Metadata extends AbstractMetadata
 		return metadata.getProperty(key + OPERATION);
 	}
 
-   public String getDescription() {
+   @Override
+public String getDescription() {
 		return metadata.getProperty(M_BEAN_INFO_DESCRIPTION);
 	}
 	

@@ -18,14 +18,14 @@
         <argument value="ie2" />
         <argument>
            <props>
-              <prop key="jco.client.ashost">nsigdb08.bbs.aphp.fr</prop>
+              <prop key="jco.client.ashost">localhost</prop>
               <prop key="jco.client.sysnr">40</prop>
               <prop key="jco.client.client">100</prop>
-              <prop key="jco.client.user">eaibatch</prop>
-              <prop key="jco.client.passwd">eaibatch</prop>
-              <prop key="jco.client.lang">FR</prop>
+              <prop key="jco.client.user">testuser</prop>
+              <prop key="jco.client.passwd">testuser</prop>
+              <prop key="jco.client.lang">EN</prop>
               <!-- Load balancing -->
-              <prop key="jco.client.gwhost">nsigdb08.bbs.aphp.fr</prop>
+              <prop key="jco.client.gwhost">localhost</prop>
               <prop key="jco.client.gwserv">sapgw40</prop>
 
               <!-- Pooling: dans le cas de JCo2, au moins 2 connexions car une est conservée par le référentiel -->

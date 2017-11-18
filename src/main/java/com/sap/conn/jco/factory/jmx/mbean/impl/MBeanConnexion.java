@@ -16,6 +16,7 @@ public class MBeanConnexion extends AbstractMBean implements IMBeanConnexion {
 
    private JCoConnexionImpl jCoConnexion;
 
+	@Override
 	public Properties getProperties() throws Exception {
 		return jCoConnexion.getDestination().getProperties();
 	}
@@ -25,6 +26,7 @@ public class MBeanConnexion extends AbstractMBean implements IMBeanConnexion {
 		this.jCoConnexion = jCoConnexion;
 	}
 
+	@Override
 	public boolean ping() {
 	   try {
 	      jCoConnexion.getDestination().ping();

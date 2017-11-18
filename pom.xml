@@ -6,18 +6,8 @@
     <description>Jco factory</description>
     <name>SAP :: JCo :: Factory</name>
     <packaging>bundle</packaging>
-    <scm>
-        <connection>scm:svn:svn://svneai.aphp.fr/olympe/olympe.commun/commun-sap/trunk</connection>
-        <developerConnection>scm:svn:svn://svneai.aphp.fr/olympe/olympe.commun/commun-sap/trunk</developerConnection>
-    </scm>
-    <ciManagement>
-        <system>jenkins</system>
-        <url>http://sap-integration.sap.aphp.fr:8080/jenkins/job/olympe.commun</url>
-    </ciManagement>
+
     <properties>
-<!--         <jco.native.lib.path>D:/project-ati/libs</jco.native.lib.path> -->
-        <lib.sapjco3>D:/project-ati/libs/sapjco3.jar</lib.sapjco3>
-        <lib.sapidoc3>D:/project-ati/libs/sapidoc3.jar</lib.sapidoc3>
         <log4j-version>1.2.16</log4j-version>
         <slf4j-version>1.6.1</slf4j-version>
         <junit-version>4.10</junit-version>
@@ -59,19 +49,15 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>de.sap</groupId>
-            <artifactId>sapidoc3</artifactId>
+            <groupId>com.sap.conn</groupId>
+            <artifactId>sapidoc</artifactId>
             <version>3.0.0</version>
-            <scope>system</scope>
-            <systemPath>${lib.sapidoc3}</systemPath>
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>de.sap</groupId>
-            <artifactId>sapjco3</artifactId>
+            <groupId>com.sap.conn</groupId>
+            <artifactId>sapjco</artifactId>
             <version>3.0.0</version>
-            <scope>system</scope>
-            <systemPath>${lib.sapjco3}</systemPath>
             <optional>true</optional>
         </dependency>
         <dependency>
@@ -103,8 +89,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
             <plugin>

@@ -33,7 +33,7 @@ public class JcoConnexionFactoryImpl implements JcoConnexionFactory {
    @Override
    public JCoConnexion getConnexion(Properties properties) throws JCoException{
       String destinationName = properties.getProperty(DESTINATION_NAME_PROPERTY);
-      if((destinationName == null) || !(destinationName instanceof String))
+      if(destinationName == null)
          throw new JCoException(101, 
             DESTINATION_NAME_KO); 
 
