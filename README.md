@@ -38,6 +38,7 @@ You will notice that the provided test is ignored. It can be run with Junit or a
 But you must also directly reference SAPJCO3 and SAPIDOC3 in the classpath. Because SAPJCO can not be renamed to work. see the JCO documentation on this topic.
 
 A simple way to do this is to use the scope system in the dependency.
+
 	private Properties configure(){
 		Properties prop = new Properties();
 
@@ -73,6 +74,7 @@ A simple way to do this is to use the scope system in the dependency.
 - at shut down, call 'DestinationDataProvider.shutdown();' to release all recources on SAP system.
 
 - to establish a connection, use the java "try with resources" or think about closing the connections.
+
 		try( JCoConnexion connexion = connexionFactory.getConnexion(DESTINATION_NAME, prop);){
 			JCoDestination destination = connexion.getDestination();
 			destination.ping();
@@ -105,6 +107,7 @@ Define a connection
 - calls the 'getConnection' method with the DestinationName and Properties parameters.
 
 Or use Blueprint with this template.
+
 		<blueprint
 			xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
 			xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0"
