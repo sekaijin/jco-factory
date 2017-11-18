@@ -153,3 +153,9 @@ Or use Blueprint with this template.
 				</service-properties>
 			</service>
 		</blueprint>
+
+## JMX
+
+the properties of JCo and those of each connection are exposed via jmx.
+
+<img src="https://github.com/sekaijin/jco-factory/raw/master/src/main/doc/images/jmx.png" />
