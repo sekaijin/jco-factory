@@ -6,10 +6,10 @@
 
 	<manifest xmlns="http://karaf.apache.org/xmlns/deployer/blueprint/v1.0.0" xsi:schemaLocation="http://karaf.apache.org/xmlns/deployer/blueprint/v1.0.0 http://karaf.apache.org/xmlns/deployer/blueprint/v1.0.0">
     Export-Service = com.sap.conn.jco.factory.JCoConnexion
-    Bundle-Name =  APHP :: Hermes :: SAP :: IE2
+    Bundle-Name =  CUSTOMER :: SAP :: IE2
     Bundle-Version = 1.0.1
     Bundle-Vendor = AP-HP
-    Bundle-Description = Connexion SAP IE2
+    Bundle-Description = SAP Connexion IE2
     Bundle-SymbolicName = sap-ie2
 	</manifest>
     <reference id="jcoFactory" timeout="20000" interface="com.sap.conn.jco.factory.JcoConnexionFactory" filter="(name=JcoConnexionFactory)" />
@@ -28,9 +28,8 @@
               <prop key="jco.client.gwhost">localhost</prop>
               <prop key="jco.client.gwserv">sapgw40</prop>
 
-              <!-- Pooling: dans le cas de JCo2, au moins 2 connexions car une est conservée par le référentiel -->
               <prop key="jco.destination.pool_capacity">10</prop>
-              <!-- (en secondes ci-dessous) -->
+              <!-- (in secondes) -->
               <prop key="jco.destination.expiration_check_period">10</prop>
               <prop key="jco.destination.expiration_time">10</prop>
            </props>

@@ -16,6 +16,7 @@ This project provides a factory that supports all the actions needed to establis
 
 In addition, it is designed to work with OSGI.
 
+## prerequisites
 You must download the SAPJCO and SAPIDOC 3.x libraries to the SAP servers.
 
 you can add these libraries to your repository. this is enough to compile the project.
@@ -30,3 +31,122 @@ you can add these libraries to your repository. this is enough to compile the pr
             <artifactId>sapjco</artifactId>
             <version>3.0.0</version>
         </dependency>
+
+## running test
+You will notice that the provided test is ignored. It can be run with Junit or as a simple 'Main'. But for that, it is necessary to have an operational SAP instance and to change the connection parameters.
+
+But you must also directly reference SAPJCO3 and SAPIDOC3 in the classpath. Because SAPJCO can not be renamed to work. see the JCO documentation on this topic.
+
+A simple way to do this is to use the scope system in the dependency.
+	private Properties configure(){
+		Properties prop = new Properties();
+
+		prop.setProperty("jco.client.ashost", "localhost");
+		prop.setProperty("jco.client.sysnr", "40");
+		prop.setProperty("jco.client.client", "100");
+		prop.setProperty("jco.client.user", "testuser");
+		prop.setProperty("jco.client.passwd", "testuser");
+		prop.setProperty("jco.client.lang", "EN");
+
+		// Load balancing
+		prop.setProperty("jco.client.gwhost", "localhost");
+		prop.setProperty("jco.client.gwserv", "sapgw40");
+
+		// Pooling
+		prop.setProperty("jco.destination.pool_capacity", "10");
+		// (seconds)
+		prop.setProperty("jco.destination.expiration_check_period", "10");
+		prop.setProperty("jco.destination.expiration_time", "10");
+		return prop;
+	}
+
+## running standalone
+
+### install
+
+- Add sapjco.jar sapidoc.jar and the native lib for your system on the classpath.
+
+### coding your app
+
+- at startup, call 'DestinationDataProvider.startup();'. you can use parameters to specify the trace level and trace path. default is 0, ".".
+
+- at shut down, call 'DestinationDataProvider.shutdown();' to release all recources on SAP system.
+
+- to establish a connection, use the java "try with resources" or think about closing the connections.
+		try( JCoConnexion connexion = connexionFactory.getConnexion(DESTINATION_NAME, prop);){
+			JCoDestination destination = connexion.getDestination();
+			destination.ping();
+		}
+
+
+## running on karaf (osgi)
+
+### install
+
+- Put sapjco.jar sapidoc.jar and the native lib for your system on lib directory of your karaf.
+
+- Add com.sap.* on org.osgi.framework.bootdelegation in custom.properties or config.properties.
+
+- Restart karaf.
+
+- Drop jco-factory-1.0.0-SNAPSHOT.jar in deploy folder. or install it via maven.
+
+		install -s mvn:com.sap.conn/jco-factory/jco-factory-1.0.0-SNAPSHOT.jar
+		
+The DestinationDataProvider instance is automatically referenced by the environment.
+
+The JcoConnexionFactory service is started.
+
+### run
+Define a connection
+
+- get a JcoConnexionFactory reference.
+
+- calls the 'getConnection' method with the DestinationName and Properties parameters.
+
+Or use Blueprint with this template.
+		<blueprint
+			xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+			xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
+
+			<manifest xmlns="http://karaf.apache.org/xmlns/deployer/blueprint/v1.0.0" xsi:schemaLocation="http://karaf.apache.org/xmlns/deployer/blueprint/v1.0.0 http://karaf.apache.org/xmlns/deployer/blueprint/v1.0.0">
+			Export-Service = com.sap.conn.jco.factory.JCoConnexion
+			Bundle-Name =  CUSTOMER :: SAP :: IE2
+			Bundle-Version = 1.0.1
+			Bundle-Vendor = AP-HP
+			Bundle-Description = SAP Connexion IE2
+			Bundle-SymbolicName = sap-ie2
+			</manifest>
+			<reference id="jcoFactory" timeout="20000" interface="com.sap.conn.jco.factory.JcoConnexionFactory" filter="(name=JcoConnexionFactory)" />
+
+			<bean  factory-ref="jcoFactory"  id="sap-ie2" factory-method="getConnexion" destroy-method="close">
+				<argument value="ie2" />
+				<argument>
+				   <props>
+					  <prop key="jco.client.ashost">localhost</prop>
+					  <prop key="jco.client.sysnr">40</prop>
+					  <prop key="jco.client.client">100</prop>
+					  <prop key="jco.client.user">testuser</prop>
+					  <prop key="jco.client.passwd">testuser</prop>
+					  <prop key="jco.client.lang">EN</prop>
+					  <!-- Load balancing -->
+					  <prop key="jco.client.gwhost">localhost</prop>
+					  <prop key="jco.client.gwserv">sapgw40</prop>
+
+					  <prop key="jco.destination.pool_capacity">10</prop>
+					  <!-- (in secondes) -->
+					  <prop key="jco.destination.expiration_check_period">10</prop>
+					  <prop key="jco.destination.expiration_time">10</prop>
+				   </props>
+				</argument>
+			</bean>
+
+			<!-- use the connexion on bean or share it as service like this -->
+			<service ref="sap-ie2" interface="com.sap.conn.jco.factory.JCoConnexion">
+				<service-properties>
+					<entry key="destinationName" value="IE2"/>
+				</service-properties>
+			</service>
+		</blueprint>
