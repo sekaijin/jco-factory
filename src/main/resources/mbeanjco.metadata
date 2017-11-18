@@ -1,0 +1,13 @@
+MBeanInfo.description=Configure JCo Lib
+
+startTracing.operation=Start tracing level : 5
+
+startTracing_1.operation=Start tracing with level
+startTracing_p1.parameterName=level
+startTracing_p1.parameter=trace level
+
+stopTracing.operation=Stop tracing (level 0)
+
+JcoVersion.attribute=JCo version 
+TraceLevel.attribute=Trace level
+TracePath.attribute=Trace path

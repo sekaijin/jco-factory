@@ -1,0 +1,5 @@
+MBeanInfo.description=JCo Connexion Properties
+
+Properties.attribute=sap JCo Destination Properties
+
+ping.operation=Destination ping
