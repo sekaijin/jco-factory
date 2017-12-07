@@ -50,7 +50,7 @@
 			<artifactId>sapidoc3</artifactId>
 			<version>3.0.0</version>
 			<scope>system</scope>
-			<systemPath>D:/project-ati/libs/sapidoc3.jar</systemPath>
+			<systemPath>/project/libs/sapidoc3.jar</systemPath>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
@@ -58,7 +58,7 @@
 			<artifactId>sapjco3</artifactId>
 			<version>3.0.0</version>
 			<scope>system</scope>
-			<systemPath>D:/project-ati/libs/sapjco3.jar</systemPath>
+			<systemPath>/project/libs/sapjco3.jar</systemPath>
 			<optional>true</optional>
 		</dependency>
 		<dependency>

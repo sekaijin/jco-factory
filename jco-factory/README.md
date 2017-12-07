@@ -16,50 +16,13 @@ This project provides a factory that supports all the actions needed to establis
 
 In addition, it is designed to work with OSGI.
 
-## prerequisites
+## prerequisites for runtime
 You must download the SAPJCO and SAPIDOC 3.x libraries to the SAP servers.
 
-you can add these libraries to your repository. this is enough to compile the project.
-
-        <dependency>
-            <groupId>com.sap.conn</groupId>
-            <artifactId>sapidoc</artifactId>
-            <version>3.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sap.conn</groupId>
-            <artifactId>sapjco</artifactId>
-            <version>3.0.0</version>
-        </dependency>
+This library depend on jmx-annotation project
 
 ## running test
-You will notice that the provided test is ignored. It can be run with Junit or as a simple 'Main'. But for that, it is necessary to have an operational SAP instance and to change the connection parameters.
-
-But you must also directly reference SAPJCO3 and SAPIDOC3 in the classpath. Because SAPJCO can not be renamed to work. see the JCO documentation on this topic.
-
-A simple way to do this is to use the scope system in the dependency.
-
-	private Properties configure(){
-		Properties prop = new Properties();
-
-		prop.setProperty("jco.client.ashost", "localhost");
-		prop.setProperty("jco.client.sysnr", "40");
-		prop.setProperty("jco.client.client", "100");
-		prop.setProperty("jco.client.user", "testuser");
-		prop.setProperty("jco.client.passwd", "testuser");
-		prop.setProperty("jco.client.lang", "EN");
-
-		// Load balancing
-		prop.setProperty("jco.client.gwhost", "localhost");
-		prop.setProperty("jco.client.gwserv", "sapgw40");
-
-		// Pooling
-		prop.setProperty("jco.destination.pool_capacity", "10");
-		// (seconds)
-		prop.setProperty("jco.destination.expiration_check_period", "10");
-		prop.setProperty("jco.destination.expiration_time", "10");
-		return prop;
-	}
+See jco-factory-itest project
 
 ## running standalone
 
