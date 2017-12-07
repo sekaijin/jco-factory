@@ -66,15 +66,15 @@ public class SendTest
 	private Properties configure(){
 		Properties prop = new Properties();
 
-		prop.setProperty("jco.client.ashost", "nsigdb08.bbs.aphp.fr");
+		prop.setProperty("jco.client.ashost", "localhost");
 		prop.setProperty("jco.client.sysnr", "40");
 		prop.setProperty("jco.client.client", "100");
-		prop.setProperty("jco.client.user", "eaibatch");
-		prop.setProperty("jco.client.passwd", "eaibatch");
+		prop.setProperty("jco.client.user", "username");
+		prop.setProperty("jco.client.passwd", "password");
 		prop.setProperty("jco.client.lang", "EN");
 
 		// Load balancing
-		prop.setProperty("jco.client.gwhost", "nsigdb08.bbs.aphp.fr");
+		prop.setProperty("jco.client.gwhost", "localhost");
 		prop.setProperty("jco.client.gwserv", "sapgw40");
 
 		// Pooling
