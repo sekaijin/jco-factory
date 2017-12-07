@@ -1,7 +1,7 @@
 # jco-factory
 JCo factory to facilitate the creation of connections to SAP.
 
-The SAPJCO3 library is made available by SAP.
+The SAPJCO3 library is available on SAP serveur.
 
 Before establishing a connection, it is necessary to initialize the library.
 
