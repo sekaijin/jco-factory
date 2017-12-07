@@ -19,7 +19,7 @@ In addition, it is designed to work with OSGI.
 ## prerequisites for runtime
 You must download the SAPJCO and SAPIDOC 3.x libraries to the SAP servers.
 
-This library depend on jmx-annotation project
+This library depend on [jmx-annotation project](https://github.com/sekaijin/jmx-annotation)
 
 ## running test
 See jco-factory-itest project
