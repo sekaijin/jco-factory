@@ -1,0 +1,44 @@
+<blueprint
+    xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+    xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
+
+	<manifest xmlns="http://karaf.apache.org/xmlns/deployer/blueprint/v1.0.0" xsi:schemaLocation="http://karaf.apache.org/xmlns/deployer/blueprint/v1.0.0 http://karaf.apache.org/xmlns/deployer/blueprint/v1.0.0">
+    Export-Service = com.sap.conn.jco.factory.JCoConnexion
+    Bundle-Name =  CUSTOMER :: SAP :: IE2
+    Bundle-Version = 1.0.1
+    Bundle-Vendor = CUSTOMER
+    Bundle-Description = SAP Connexion IE2
+    Bundle-SymbolicName = sap-ie2
+	</manifest>
+    <reference id="jcoFactory" timeout="20000" interface="com.sap.conn.jco.factory.JcoConnexionFactory" filter="(name=JcoConnexionFactory)" />
+
+    <bean  factory-ref="jcoFactory"  id="sap-ie2" factory-method="getConnexion" destroy-method="close">
+        <argument value="ie2" />
+        <argument>
+           <props>
+              <prop key="jco.client.ashost">localhost</prop>
+              <prop key="jco.client.sysnr">40</prop>
+              <prop key="jco.client.client">100</prop>
+              <prop key="jco.client.user">testuser</prop>
+              <prop key="jco.client.passwd">testuser</prop>
+              <prop key="jco.client.lang">EN</prop>
+              <!-- Load balancing -->
+              <prop key="jco.client.gwhost">localhost</prop>
+              <prop key="jco.client.gwserv">sapgw40</prop>
+
+              <prop key="jco.destination.pool_capacity">10</prop>
+              <!-- (in secondes) -->
+              <prop key="jco.destination.expiration_check_period">10</prop>
+              <prop key="jco.destination.expiration_time">10</prop>
+           </props>
+        </argument>
+    </bean>
+
+	<service ref="sap-ie2" interface="com.sap.conn.jco.factory.JCoConnexion">
+		<service-properties>
+			<entry key="destinationName" value="IE2"/>
+		</service-properties>
+	</service>
+</blueprint>
