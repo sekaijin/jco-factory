@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 
-import javax.management.NotCompliantMBeanException;
 import javax.management.annotation.AnnotatedMBean;
 import javax.management.annotation.Description;
 import javax.management.annotation.Name;
@@ -31,7 +30,7 @@ public class JcoConfigMBean extends AnnotatedMBean implements IJcoConfigMBean
 	public JcoConfigMBean(
 	   @Description("trace level") @Name("level")int tracelevel, 
 	   @Description("trace path")  @Name("path") String path)
-	      throws NotCompliantMBeanException, IOException{
+	      throws IOException{
 	   super (IJcoConfigMBean.class);
 		JCo.setTrace(tracelevel, path);
 		this.defaultPath = path;

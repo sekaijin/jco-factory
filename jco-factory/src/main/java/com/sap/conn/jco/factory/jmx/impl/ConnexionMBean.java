@@ -2,7 +2,6 @@ package com.sap.conn.jco.factory.jmx.impl;
 
 import java.util.Properties;
 
-import javax.management.NotCompliantMBeanException;
 import javax.management.annotation.AnnotatedMBean;
 import javax.management.annotation.Description;
 import javax.management.annotation.Name;
@@ -21,7 +20,7 @@ public class ConnexionMBean extends AnnotatedMBean implements IConnexionMBean {
 
    @Description("default JCoConnexion constructor")
 	public ConnexionMBean(@Description("jCoConnexion implementation") @Name("jCoConnexion")JCoConnexionImpl jCoConnexion, 
-	   @Description("Name of JCO Destination") @Name("destinationName")String destinationName) throws NotCompliantMBeanException {
+	   @Description("Name of JCO Destination") @Name("destinationName")String destinationName) {
 	   super(IConnexionMBean.class, destinationName);
 		this.jCoConnexion = jCoConnexion;
 	}

@@ -79,6 +79,11 @@
 		    <version>4.3.0</version>
 		    <scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>javax.management</groupId>
+			<artifactId>jmx-annotation</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
     </dependencies>
     <build>
         <defaultGoal>install</defaultGoal>
@@ -106,7 +111,8 @@
                 <configuration>
                     <instructions>
                         <Export-Package>
-                            com.sap.conn.jco.factory
+                            com.sap.conn.jco.factory,
+                            com.sap.conn.jco.factory.jmx
                         </Export-Package>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Activator>com.sap.conn.jco.factory.impl.Activator</Bundle-Activator>
