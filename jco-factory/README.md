@@ -121,4 +121,4 @@ Or use Blueprint with this template.
 
 the properties of JCo and those of each connection are exposed via jmx.
 
-<img src="https://github.com/sekaijin/jco-factory/raw/master/src/main/doc/images/jmx.png" />
+<img src="https://github.com/sekaijin/jco-factory/blob/master/jco-factory/src/main/doc/images/jmx.png?raw=true" />
