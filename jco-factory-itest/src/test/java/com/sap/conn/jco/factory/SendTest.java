@@ -25,25 +25,24 @@ import com.sap.conn.jco.JCoDestination;
 import com.sap.conn.jco.JCoException;
 import com.sap.conn.jco.factory.impl.JcoConnexionFactoryImpl;
 
-public class SendTest
-{
+public class SendTest {
 	private static final String DESTINATION_NAME = "IE2";
 	private static final Logger logger = LoggerFactory.getLogger(SendTest.class);
 
-	public static void main(String[] args) throws Exception{
+	public static void main(String[] args) throws Exception {
 		SendTest send = new SendTest();
 		send.test();
 	}
 
 	@Test
-	//@Ignore
-	public void test() throws Exception{
+	// @Ignore
+	public void test() throws Exception {
 
-		//DestinationDataProvider.startup();
+		// DestinationDataProvider.startup();
 		DestinationDataProvider.startup(4, "target");
 		Properties prop = configure();
 		JcoConnexionFactory connexionFactory = new JcoConnexionFactoryImpl();
-		try( JCoConnexion connexion = connexionFactory.getConnexion(DESTINATION_NAME, prop);){
+		try (JCoConnexion connexion = connexionFactory.getConnexion(DESTINATION_NAME, prop);) {
 			JCoDestination destination = connexion.getDestination();
 			destination.ping();
 			logger.info(destination.getAttributes().toString());
@@ -51,7 +50,7 @@ public class SendTest
 			IDocDocument idoc = getIdoc(destination);
 
 			String tid = destination.createTID();
-			if(null != tid){
+			if (null != tid) {
 				JCoIDoc.send(idoc, IDocFactory.IDOC_VERSION_DEFAULT, destination, tid);
 				destination.confirmTID(tid);
 			}
@@ -63,7 +62,7 @@ public class SendTest
 		DestinationDataProvider.shutdown();
 	}
 
-	private Properties configure(){
+	private Properties configure() {
 		Properties prop = new Properties();
 
 		prop.setProperty("jco.client.ashost", "localhost");
@@ -86,15 +85,15 @@ public class SendTest
 	}
 
 	/**
-	 * @throws IDocParseException 
-	 * @throws JCoException 
-	 * @throws IDocConversionException  
-	 * @throws IDocSyntaxException 
+	 * @throws IDocParseException
+	 * @throws JCoException
+	 * @throws IDocConversionException
+	 * @throws IDocSyntaxException
 	 */
 	private IDocDocument getIdoc(JCoDestination destination) throws FileNotFoundException, IOException,
-	IDocParseException, JCoException, IDocConversionException, IDocSyntaxException{
+			IDocParseException, JCoException, IDocConversionException, IDocSyntaxException {
 
-		try(final InputStream fileReader = getClass().getClassLoader().getResourceAsStream("idoc48603.xml");) {
+		try (final InputStream fileReader = getClass().getClassLoader().getResourceAsStream("idoc48603.xml");) {
 			String data = IOUtils.toString(fileReader, CharEncoding.UTF_8);
 
 			logger.info(data);

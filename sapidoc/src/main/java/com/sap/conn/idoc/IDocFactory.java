@@ -1,12 +1,11 @@
 package com.sap.conn.idoc;
 
-public class IDocFactory
-{
+public class IDocFactory {
 
-   public static final String IDOC_VERSION_DEFAULT = null;
+	public static final String IDOC_VERSION_DEFAULT = null;
 
-   public IDocXMLProcessor getIDocXMLProcessor(){
-      return new IDocXMLProcessor();
-   }
+	public IDocXMLProcessor getIDocXMLProcessor() {
+		return new IDocXMLProcessor();
+	}
 
 }

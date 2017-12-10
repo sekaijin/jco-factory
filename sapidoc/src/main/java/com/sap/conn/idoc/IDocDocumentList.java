@@ -1,17 +1,16 @@
 package com.sap.conn.idoc;
 
-public class IDocDocumentList
-{
+public class IDocDocumentList {
 
-   private String data;
+	private String data;
 
-   public IDocDocumentList(String data){
-      this.data = data;
-   }
+	public IDocDocumentList(String data) {
+		this.data = data;
+	}
 
-   public IDocDocument get(int i){
-      IDocDocument idoc = new IDocDocument(data);
-      return idoc;
-   }
+	public IDocDocument get(int i) {
+		IDocDocument idoc = new IDocDocument(data);
+		return idoc;
+	}
 
 }

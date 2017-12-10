@@ -11,27 +11,24 @@ import javax.management.annotation.Name;
 import com.sap.conn.jco.JCo;
 import com.sap.conn.jco.factory.jmx.IJcoConfigMBean;
 
-public class JcoConfigMBean extends AnnotatedMBean implements IJcoConfigMBean
-{
+public class JcoConfigMBean extends AnnotatedMBean implements IJcoConfigMBean {
 
 	private static final String UNKNOWN = "unknown";
 
 	// jco.trace_level de 0 à 10
-	private static final String JCO_TRACE_LEVEL = "jco.trace_level"; 
+	private static final String JCO_TRACE_LEVEL = "jco.trace_level";
 	// jco.trace_path ne s'applique pas aux fichiers CPIC
 	private static final String JCO_TRACE_PATH = "jco.trace_path";
 
 	private String defaultPath;
 
 	/**
-	 * @throws IOException  
+	 * @throws IOException
 	 */
 	@Description("default JcoConfig constructor")
-	public JcoConfigMBean(
-	   @Description("trace level") @Name("level")int tracelevel, 
-	   @Description("trace path")  @Name("path") String path)
-	      throws IOException{
-	   super (IJcoConfigMBean.class);
+	public JcoConfigMBean(@Description("trace level") @Name("level") int tracelevel,
+			@Description("trace path") @Name("path") String path) throws IOException {
+		super(IJcoConfigMBean.class);
 		JCo.setTrace(tracelevel, path);
 		this.defaultPath = path;
 	}
@@ -53,26 +50,26 @@ public class JcoConfigMBean extends AnnotatedMBean implements IJcoConfigMBean
 	}
 
 	@Override
-	public void setTraceLevel(int level){
+	public void setTraceLevel(int level) {
 		try {
 			JCo.setTrace(level, getPath());
-		} catch(Exception e) {
+		} catch (Exception e) {
 			return;
 		}
 	}
 
-	private String getPath(){
-		if(null == JCo.getTracePath()) {
+	private String getPath() {
+		if (null == JCo.getTracePath()) {
 			return defaultPath;
 		}
 		return JCo.getTracePath();
 	}
 
 	@Override
-	public int getTraceLevel(){
+	public int getTraceLevel() {
 		try {
 			return JCo.getTraceLevel();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			return 0;
 		}
 	}
@@ -87,7 +84,7 @@ public class JcoConfigMBean extends AnnotatedMBean implements IJcoConfigMBean
 	public void setTracePath(String tracePath) {
 		if (null != tracePath) {
 			File repTracePath = new File(tracePath);
-			if(!repTracePath.exists()){
+			if (!repTracePath.exists()) {
 				repTracePath.mkdirs();
 			}
 		}
@@ -102,13 +99,13 @@ public class JcoConfigMBean extends AnnotatedMBean implements IJcoConfigMBean
 	public String getJcoVersion() {
 		try {
 			return JCo.getVersion();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			return UNKNOWN;
 		}
 	}
 
 	@Override
-	public String getTracePath(){
+	public String getTracePath() {
 		return getPath();
 	}
 

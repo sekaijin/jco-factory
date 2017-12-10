@@ -3,17 +3,16 @@ package com.sap.conn.jco;
 import java.util.Properties;
 import com.sap.conn.jco.rt.ConnectionAttributes;
 
-public interface JCoDestination
-{
+public interface JCoDestination {
 
-   public Properties getProperties();
-   
-   public void ping();
+	public Properties getProperties();
 
-   public ConnectionAttributes getAttributes();
+	public void ping();
 
-   public String createTID();
+	public ConnectionAttributes getAttributes();
 
-   public void confirmTID(String tid);
+	public String createTID();
+
+	public void confirmTID(String tid);
 
 }

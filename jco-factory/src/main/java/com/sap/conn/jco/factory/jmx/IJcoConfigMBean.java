@@ -7,33 +7,32 @@ import javax.management.annotation.Name;
 
 @Description("Configure JCo Lib")
 @MBeanName("com.sap.conn.jco:name=JCo")
-public interface IJcoConfigMBean
-{
-   
-   @Description("Start tracing with level")
-   @Impact(Impact.ACTION)
-   public void startTracing(@Description("trace level") @Name("level")int level);
+public interface IJcoConfigMBean {
 
-   @Description("Start tracing level : 5")
-   @Impact(Impact.ACTION)
-   public void startTracing();
+	@Description("Start tracing with level")
+	@Impact(Impact.ACTION)
+	public void startTracing(@Description("trace level") @Name("level") int level);
 
-   @Description("Stop tracing (level 0)")
-   @Impact(Impact.ACTION)
-   public void stopTracing();
+	@Description("Start tracing level : 5")
+	@Impact(Impact.ACTION)
+	public void startTracing();
 
-   @Description("Trace level")
-   @Impact(Impact.ACTION)
-   public void setTraceLevel(int level);
-   
-   @Description("Trace level")
-   @Impact(Impact.INFO)
-   public int getTraceLevel();
+	@Description("Stop tracing (level 0)")
+	@Impact(Impact.ACTION)
+	public void stopTracing();
 
-   @Description("Trace path")
-   public String getTracePath();
+	@Description("Trace level")
+	@Impact(Impact.ACTION)
+	public void setTraceLevel(int level);
 
-   @Description("JCo version")
-   public String getJcoVersion();
+	@Description("Trace level")
+	@Impact(Impact.INFO)
+	public int getTraceLevel();
+
+	@Description("Trace path")
+	public String getTracePath();
+
+	@Description("JCo version")
+	public String getJcoVersion();
 
 }

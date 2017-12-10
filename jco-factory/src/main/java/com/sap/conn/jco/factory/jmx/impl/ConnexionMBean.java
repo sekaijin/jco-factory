@@ -11,28 +11,28 @@ import com.sap.conn.jco.factory.jmx.IConnexionMBean;
 
 public class ConnexionMBean extends AnnotatedMBean implements IConnexionMBean {
 
-   private JCoConnexionImpl jCoConnexion;
+	private JCoConnexionImpl jCoConnexion;
 
 	@Override
 	public Properties getProperties() throws Exception {
 		return jCoConnexion.getDestination().getProperties();
 	}
 
-   @Description("default JCoConnexion constructor")
-	public ConnexionMBean(@Description("jCoConnexion implementation") @Name("jCoConnexion")JCoConnexionImpl jCoConnexion, 
-	   @Description("Name of JCO Destination") @Name("destinationName")String destinationName) {
-	   super(IConnexionMBean.class, destinationName);
+	@Description("default JCoConnexion constructor")
+	public ConnexionMBean(
+			@Description("jCoConnexion implementation") @Name("jCoConnexion") JCoConnexionImpl jCoConnexion) {
+		super(IConnexionMBean.class, jCoConnexion.getDestinationName());
 		this.jCoConnexion = jCoConnexion;
 	}
 
 	@Override
 	public boolean isAlive() {
-	   try {
-	      jCoConnexion.getDestination().ping();
-	      return true; 
-	   }catch (Exception e) {
-         return false;
-      }
-	   
+		try {
+			jCoConnexion.getDestination().ping();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+
 	}
 }

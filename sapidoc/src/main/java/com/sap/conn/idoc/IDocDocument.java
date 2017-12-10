@@ -1,26 +1,25 @@
 package com.sap.conn.idoc;
 
-public class IDocDocument
-{
+public class IDocDocument {
 
 	private String data;
 
-	public IDocDocument(String data){
+	public IDocDocument(String data) {
 		this.data = data;
 	}
 
-	public String getIDocNumber(){
+	public String getIDocNumber() {
 		return "1235498644";
 	}
 
-	public void setSenderPartnerType(String partnerType){
+	public void setSenderPartnerType(String partnerType) {
 	}
 
-	public void setSenderPartnerNumber(String partnerNumber){
+	public void setSenderPartnerNumber(String partnerNumber) {
 	}
 
 	@Override
-	public String toString(){
+	public String toString() {
 		return data;
 	}
 
