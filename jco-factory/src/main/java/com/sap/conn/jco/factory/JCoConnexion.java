@@ -5,10 +5,11 @@ import com.sap.conn.jco.JCoException;
 
 public interface JCoConnexion extends AutoCloseable {
 
-	@Override
-	void close();
+    @Override
+    void close();
 
-	String getDestinationName();
-	JCoDestination getDestination() throws JCoException;
+    String getDestinationName();
+
+    JCoDestination getDestination() throws JCoException;
 
 }

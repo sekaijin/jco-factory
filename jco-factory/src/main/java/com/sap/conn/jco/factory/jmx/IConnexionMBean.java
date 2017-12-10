@@ -8,9 +8,9 @@ import javax.management.annotation.MBeanName;
 @Description("JCo Connexion Properties")
 @MBeanName("com.sap.conn.jco:type=connexion,name=%s")
 public interface IConnexionMBean {
-	@Description("sap JCo Destination Properties")
-	public Properties getProperties() throws Exception;
+    @Description("sap JCo Destination Properties")
+    public Properties getProperties() throws Exception;
 
-	@Description("Destination connexion is alive (ping test)")
-	public boolean isAlive();
+    @Description("Destination connexion is alive (ping test)")
+    public boolean isAlive();
 }

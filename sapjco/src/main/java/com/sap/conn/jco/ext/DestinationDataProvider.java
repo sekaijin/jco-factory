@@ -4,10 +4,10 @@ import java.util.Properties;
 
 public interface DestinationDataProvider {
 
-	Properties getDestinationProperties(String destinationName);
+    Properties getDestinationProperties(String destinationName);
 
-	void setDestinationDataEventListener(DestinationDataEventListener eventListener);
+    void setDestinationDataEventListener(DestinationDataEventListener eventListener);
 
-	boolean supportsEvents();
+    boolean supportsEvents();
 
 }

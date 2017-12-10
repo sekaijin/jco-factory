@@ -9,30 +9,30 @@ import javax.management.annotation.Name;
 @MBeanName("com.sap.conn.jco:name=JCo")
 public interface IJcoConfigMBean {
 
-	@Description("Start tracing with level")
-	@Impact(Impact.ACTION)
-	public void startTracing(@Description("trace level") @Name("level") int level);
+    @Description("Start tracing with level")
+    @Impact(Impact.ACTION)
+    public void startTracing(@Description("trace level") @Name("level") int level);
 
-	@Description("Start tracing level : 5")
-	@Impact(Impact.ACTION)
-	public void startTracing();
+    @Description("Start tracing level : 5")
+    @Impact(Impact.ACTION)
+    public void startTracing();
 
-	@Description("Stop tracing (level 0)")
-	@Impact(Impact.ACTION)
-	public void stopTracing();
+    @Description("Stop tracing (level 0)")
+    @Impact(Impact.ACTION)
+    public void stopTracing();
 
-	@Description("Trace level")
-	@Impact(Impact.ACTION)
-	public void setTraceLevel(int level);
+    @Description("Trace level")
+    @Impact(Impact.ACTION)
+    public void setTraceLevel(int level);
 
-	@Description("Trace level")
-	@Impact(Impact.INFO)
-	public int getTraceLevel();
+    @Description("Trace level")
+    @Impact(Impact.INFO)
+    public int getTraceLevel();
 
-	@Description("Trace path")
-	public String getTracePath();
+    @Description("Trace path")
+    public String getTracePath();
 
-	@Description("JCo version")
-	public String getJcoVersion();
+    @Description("JCo version")
+    public String getJcoVersion();
 
 }

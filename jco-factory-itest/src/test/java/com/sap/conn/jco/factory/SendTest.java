@@ -26,89 +26,89 @@ import com.sap.conn.jco.JCoException;
 import com.sap.conn.jco.factory.impl.JcoConnexionFactoryImpl;
 
 public class SendTest {
-	private static final String DESTINATION_NAME = "IE2";
-	private static final Logger logger = LoggerFactory.getLogger(SendTest.class);
+    private static final String DESTINATION_NAME = "IE2";
+    private static final Logger logger = LoggerFactory.getLogger(SendTest.class);
 
-	public static void main(String[] args) throws Exception {
-		SendTest send = new SendTest();
-		send.test();
-	}
+    public static void main(String[] args) throws Exception {
+        SendTest send = new SendTest();
+        send.test();
+    }
 
-	@Test
-	// @Ignore
-	public void test() throws Exception {
+    @Test
+    // @Ignore
+    public void test() throws Exception {
 
-		// DestinationDataProvider.startup();
-		DestinationDataProvider.startup(4, "target");
-		Properties prop = configure();
-		JcoConnexionFactory connexionFactory = new JcoConnexionFactoryImpl();
-		try (JCoConnexion connexion = connexionFactory.getConnexion(DESTINATION_NAME, prop);) {
-			JCoDestination destination = connexion.getDestination();
-			destination.ping();
-			logger.info(destination.getAttributes().toString());
+        // DestinationDataProvider.startup();
+        DestinationDataProvider.startup(4, "target");
+        Properties prop = configure();
+        JcoConnexionFactory connexionFactory = new JcoConnexionFactoryImpl();
+        try (JCoConnexion connexion = connexionFactory.getConnexion(DESTINATION_NAME, prop);) {
+            JCoDestination destination = connexion.getDestination();
+            destination.ping();
+            logger.info(destination.getAttributes().toString());
 
-			IDocDocument idoc = getIdoc(destination);
+            IDocDocument idoc = getIdoc(destination);
 
-			String tid = destination.createTID();
-			if (null != tid) {
-				JCoIDoc.send(idoc, IDocFactory.IDOC_VERSION_DEFAULT, destination, tid);
-				destination.confirmTID(tid);
-			}
-			logger.info(tid);
-			logger.info(idoc.getIDocNumber());
-			logger.info(idoc.toString());
-			assertNotNull("Not null TID", tid);
-		}
-		DestinationDataProvider.shutdown();
-	}
+            String tid = destination.createTID();
+            if (null != tid) {
+                JCoIDoc.send(idoc, IDocFactory.IDOC_VERSION_DEFAULT, destination, tid);
+                destination.confirmTID(tid);
+            }
+            logger.info(tid);
+            logger.info(idoc.getIDocNumber());
+            logger.info(idoc.toString());
+            assertNotNull("Not null TID", tid);
+        }
+        DestinationDataProvider.shutdown();
+    }
 
-	private Properties configure() {
-		Properties prop = new Properties();
+    private Properties configure() {
+        Properties prop = new Properties();
 
-		prop.setProperty("jco.client.ashost", "localhost");
-		prop.setProperty("jco.client.sysnr", "40");
-		prop.setProperty("jco.client.client", "100");
-		prop.setProperty("jco.client.user", "username");
-		prop.setProperty("jco.client.passwd", "password");
-		prop.setProperty("jco.client.lang", "EN");
+        prop.setProperty("jco.client.ashost", "localhost");
+        prop.setProperty("jco.client.sysnr", "40");
+        prop.setProperty("jco.client.client", "100");
+        prop.setProperty("jco.client.user", "username");
+        prop.setProperty("jco.client.passwd", "password");
+        prop.setProperty("jco.client.lang", "EN");
 
-		// Load balancing
-		prop.setProperty("jco.client.gwhost", "localhost");
-		prop.setProperty("jco.client.gwserv", "sapgw40");
+        // Load balancing
+        prop.setProperty("jco.client.gwhost", "localhost");
+        prop.setProperty("jco.client.gwserv", "sapgw40");
 
-		// Pooling
-		prop.setProperty("jco.destination.pool_capacity", "10");
-		// (seconds)
-		prop.setProperty("jco.destination.expiration_check_period", "10");
-		prop.setProperty("jco.destination.expiration_time", "10");
-		return prop;
-	}
+        // Pooling
+        prop.setProperty("jco.destination.pool_capacity", "10");
+        // (seconds)
+        prop.setProperty("jco.destination.expiration_check_period", "10");
+        prop.setProperty("jco.destination.expiration_time", "10");
+        return prop;
+    }
 
-	/**
-	 * @throws IDocParseException
-	 * @throws JCoException
-	 * @throws IDocConversionException
-	 * @throws IDocSyntaxException
-	 */
-	private IDocDocument getIdoc(JCoDestination destination) throws FileNotFoundException, IOException,
-			IDocParseException, JCoException, IDocConversionException, IDocSyntaxException {
+    /**
+     * @throws IDocParseException
+     * @throws JCoException
+     * @throws IDocConversionException
+     * @throws IDocSyntaxException
+     */
+    private IDocDocument getIdoc(JCoDestination destination) throws FileNotFoundException, IOException,
+            IDocParseException, JCoException, IDocConversionException, IDocSyntaxException {
 
-		try (final InputStream fileReader = getClass().getClassLoader().getResourceAsStream("idoc48603.xml");) {
-			String data = IOUtils.toString(fileReader, CharEncoding.UTF_8);
+        try (final InputStream fileReader = getClass().getClassLoader().getResourceAsStream("idoc48603.xml");) {
+            String data = IOUtils.toString(fileReader, CharEncoding.UTF_8);
 
-			logger.info(data);
+            logger.info(data);
 
-			String partnerType = "LS";
-			String partnerNumber = "EXCHANGE";
+            String partnerType = "LS";
+            String partnerNumber = "EXCHANGE";
 
-			IDocDocument idoc = null;
-			IDocXMLProcessor xmlProcessor = JCoIDoc.getIDocFactory().getIDocXMLProcessor();
-			IDocDocumentList idocList = xmlProcessor.parse(JCoIDoc.getIDocRepository(destination), data);
-			idoc = idocList.get(0);
-			idoc.setSenderPartnerType(partnerType);
-			idoc.setSenderPartnerNumber(partnerNumber);
-			return idoc;
-		}
-	}
+            IDocDocument idoc = null;
+            IDocXMLProcessor xmlProcessor = JCoIDoc.getIDocFactory().getIDocXMLProcessor();
+            IDocDocumentList idocList = xmlProcessor.parse(JCoIDoc.getIDocRepository(destination), data);
+            idoc = idocList.get(0);
+            idoc.setSenderPartnerType(partnerType);
+            idoc.setSenderPartnerNumber(partnerNumber);
+            return idoc;
+        }
+    }
 
 }
